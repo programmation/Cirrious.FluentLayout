@@ -1,4 +1,4 @@
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core.ViewModels;
 using QuickLayout.Core.Services;
 
 namespace QuickLayout.Core.ViewModels
@@ -27,14 +27,9 @@ namespace QuickLayout.Core.ViewModels
             }
         }
 
-        public void Zero()
-        {
-            Generosity = 0;
-        }
-        public void Full()
-        {
-            Generosity = 100;
-        }
+        public void Zero() => Generosity = 0;
+
+        public void Full() => Generosity = 100;
 
         public int Generosity
         {
@@ -42,7 +37,7 @@ namespace QuickLayout.Core.ViewModels
             set
             {
                 _generosity = Limit(value);
-                Cirrious.CrossCore.Core.MvxAsyncDispatcher.BeginAsync(() => RaisePropertyChanged(() => Generosity));
+				MvvmCross.Platform.Core.MvxAsyncDispatcher.BeginAsync(() => RaisePropertyChanged(() => Generosity));
                 Recalcuate();
             }
         }
@@ -74,9 +69,7 @@ namespace QuickLayout.Core.ViewModels
             return value;
         }
 
-        private void Recalcuate()
-        {
+        private void Recalcuate() =>
             Tip = _calculation.TipAmount(SubTotal, Generosity);
-        }
     }
 }

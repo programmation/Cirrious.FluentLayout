@@ -1,25 +1,19 @@
 using UIKit;
-using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.ViewModels;
-using Cirrious.MvvmCross.Touch.Platform;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Platform;
+using MvvmCross.Platform.Platform;
 
 namespace QuickLayout.Touch
 {
-	public class Setup : MvxTouchSetup
+	public class Setup : MvxIosSetup
 	{
 		public Setup(MvxApplicationDelegate applicationDelegate, UIWindow window)
             : base(applicationDelegate, window)
 		{
 		}
 
-		protected override IMvxApplication CreateApp ()
-		{
-			return new Core.App();
-		}
+		protected override IMvxApplication CreateApp() => new Core.App();
 		
-        protected override IMvxTrace CreateDebugTrace()
-        {
-            return new DebugTrace();
-        }
+        protected override IMvxTrace CreateDebugTrace() => new DebugTrace();
 	}
 }
